@@ -1,0 +1,26 @@
+//created on: Feb 22, 2017
+package com.sample
+
+import com.sample.Account;
+
+//list any import classes here.
+
+
+
+//declare any global variables here
+
+
+
+
+rule "nameRequired"
+ruleflow-group "helloworldgroup"
+
+    when
+        //conditions
+        $account:Account(name==null)
+    then
+        //actions
+        System.out.println("name cannot be empty");
+
+end
+
