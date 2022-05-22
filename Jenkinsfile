@@ -1,30 +1,21 @@
 pipeline{
 
 	
-	
-	agent {
-        docker {
-            image 'maven:3.8.1-adoptopenjdk-11' 
-            args '-v /root/.m2:/root/.m2' 
-        }
-    }
-    stages {
-        stage('Build') { 
-            steps {
-                sh 'mvn -B -DskipTests clean package' 
-            }
-        }
-    }
    agent any
 	environment {
 		DOCKERHUB_CREDENTIALS=credentials('docker-hub-gow')
 	}
+	 docker {
+            image 'maven:3.8.1-adoptopenjdk-11' 
+            args '-v /root/.m2:/root/.m2' 
+        }
 
 	stages {
 
 		stage('Build') {
 
 			steps {
+				 sh 'mvn -B -DskipTests clean package' 
 				sh 'docker build -t gmuniraju/assignment-1:latest .'
 			}
 		}
